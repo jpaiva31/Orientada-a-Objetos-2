@@ -10,6 +10,10 @@ public class Escorredor {
             throw new IllegalStateException("A fila de pratos está cheia. Não é possível adicionar mais pratos.");
         }
         filaPratos.addLast(prato);
+
+        if (filaPratos.size() == tamanhoMaximo) {
+            System.out.println("Total de pratos: " + filaPratos.size());
+        }
     }
 
     public Prato removerPrato() {

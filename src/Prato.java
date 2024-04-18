@@ -12,19 +12,7 @@ public class Prato {
     private static int proximoNumeroDeSerie = 1;
     private NivelSujeira nivelSujeira; 
 
-    public NivelSujeira setNivelSujeira() {
-        Random rand = new Random();
-        int chance = rand.nextInt(100);
-        if (chance < 30) {
-            return NivelSujeira.BAIXO;
-        } else if (chance < 90) {
-            return NivelSujeira.MEDIO;
-        } else {
-            return NivelSujeira.ENGORDURADO;
-        }
-    }
-
-    public NivelSujeira getNivelSujeira(NivelSujeira nivelSujeira) {
+    public NivelSujeira getNivelSujeira() {
         return this.nivelSujeira;
     }
 
@@ -36,8 +24,8 @@ public class Prato {
         this.numeroSerie = numeroSerie;
     }
 
-    public Prato() {
-        this.nivelSujeira = setNivelSujeira();
+    public Prato(NivelSujeira nivelSujeira) {
+        this.nivelSujeira = nivelSujeira;
         this.numeroSerie = proximoNumeroDeSerie;
         proximoNumeroDeSerie++;
     } 
