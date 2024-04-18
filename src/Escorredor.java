@@ -1,9 +1,11 @@
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
 
 public class Escorredor {
     private LinkedList<Prato> filaPratos;
     private static int tamanhoMaximo = 0;
+    private static final Logger logger = Logger.getLogger(Escorredor.class.getName());
 
     public void adicionarPrato(Prato prato) {
         if (filaPratos.size() >= tamanhoMaximo) {
@@ -12,7 +14,7 @@ public class Escorredor {
         filaPratos.addLast(prato);
 
         if (filaPratos.size() == tamanhoMaximo) {
-            System.out.println("Total de pratos: " + filaPratos.size());
+            logger.info("Total de pratos: " + filaPratos.size());
         }
     }
 
@@ -25,6 +27,14 @@ public class Escorredor {
 
     public int tamanhoFila() {
         return filaPratos.size();
+    }
+
+    public boolean filaVazia() {
+        return filaPratos.isEmpty();
+    }
+
+    public boolean filaCheia() {
+        return filaPratos.size() == tamanhoMaximo;
     }
 
     public Escorredor (int tamanhoMaximoFila) {

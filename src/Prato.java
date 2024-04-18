@@ -1,5 +1,3 @@
-import java.util.Random;
-
 
 public class Prato {
     enum NivelSujeira {
@@ -10,7 +8,7 @@ public class Prato {
 
     private int numeroSerie;
     private static int proximoNumeroDeSerie = 1;
-    private NivelSujeira nivelSujeira; 
+    private NivelSujeira nivelSujeira;
 
     public NivelSujeira getNivelSujeira() {
         return this.nivelSujeira;
@@ -28,5 +26,5 @@ public class Prato {
         this.nivelSujeira = nivelSujeira;
         this.numeroSerie = proximoNumeroDeSerie;
         proximoNumeroDeSerie++;
-    } 
+    }
 }
