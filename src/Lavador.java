@@ -1,7 +1,8 @@
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Lavador implements Runnable {
-    private Escorredor escorredor;
+    private static Escorredor escorredor;
     private static final Logger logger = Logger.getLogger(Escorredor.class.getName());
     private boolean emExecucao;
 
@@ -10,8 +11,8 @@ public class Lavador implements Runnable {
     }
 
     public Lavador(Escorredor escorredor) {
-        System.out.println("Lavador: Criado");
-        this.escorredor = escorredor;
+        Logger.getLogger("").setLevel(Level.INFO);
+        Lavador.escorredor = escorredor;
         emExecucao = true;
     }
 
@@ -23,7 +24,7 @@ public class Lavador implements Runnable {
             case MEDIO:
                 return 5;
             case ENGORDURADO:
-                return 10;
+                return 1;
             default:
                 throw new IllegalArgumentException("Nível de sujeira inválido: " + nivel);
         }
@@ -35,27 +36,19 @@ public class Lavador implements Runnable {
             try {
                 Prato pratoASerLavado = null;
 
-                synchronized (escorredor) {
-                    if (escorredor.filaCheia()) {
-                        while (escorredor.filaCheia()) {
-                            escorredor.wait();
-                        }
-                    }
-                    pratoASerLavado = PratosSujosFactory.criarPratoSujo();
-                    int tempoLavagem = calcularTempoLavagem(pratoASerLavado.getNivelSujeira());
-                    logger.info("Lavador: Limpando prato " + pratoASerLavado.getNivelSujeira() + " por " + tempoLavagem + "ms...");
+                pratoASerLavado = PratosSujosFactory.criarPratoSujo();
+                int tempoLavagem = calcularTempoLavagem(pratoASerLavado.getNivelSujeira());
+                logger.info("Lavador: Lavando prato " + pratoASerLavado.getNivelSujeira() + " por " + tempoLavagem + "ms...");
 
-                    Thread.sleep(tempoLavagem);
+                Thread.sleep(tempoLavagem);
 
-                    escorredor.adicionarPrato(pratoASerLavado);
-                    logger.info("Lavador: Prato limpo colocado no escorredor.");
-
-                    escorredor.notifyAll();
-                }
+                escorredor.adicionarPrato(pratoASerLavado);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } catch (IllegalStateException e) {
+                Thread.currentThread().getUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
             }
         }
     }
