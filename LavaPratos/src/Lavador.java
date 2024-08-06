@@ -24,7 +24,7 @@ public class Lavador implements Runnable {
             case MEDIO:
                 return 5;
             case ENGORDURADO:
-                return 1;
+                return 10;
             default:
                 throw new IllegalArgumentException("Nível de sujeira inválido: " + nivel);
         }

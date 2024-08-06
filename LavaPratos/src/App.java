@@ -19,7 +19,6 @@ public class App {
             System.exit(1);
         });
 
-        // Define um UncaughtExceptionHandler para o enxugadorThread
         enxugadorThread.setUncaughtExceptionHandler((thread, throwable) -> {
             System.exit(1);
         });
