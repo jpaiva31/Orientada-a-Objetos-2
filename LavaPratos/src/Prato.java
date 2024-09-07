@@ -18,10 +18,6 @@ public class Prato {
         return numeroSerie;
     }
 
-    public void setNumeroSerie(int numeroSerie) {
-        this.numeroSerie = numeroSerie;
-    }
-
     public Prato(NivelSujeira nivelSujeira) {
         this.nivelSujeira = nivelSujeira;
         this.numeroSerie = proximoNumeroDeSerie;

@@ -16,7 +16,6 @@ public class Lavador implements Runnable {
         emExecucao = true;
     }
 
-
     private int calcularTempoLavagem(Prato.NivelSujeira nivel) {
         switch (nivel) {
             case BAIXO:

@@ -8,6 +8,19 @@ public class Escorredor {
     private static int tamanhoMaximo = 10;
     private static final Logger logger = Logger.getLogger(Escorredor.class.getName());
 
+
+    public int tamanhoFila() {
+        return filaPratos.size();
+    }
+
+    public boolean filaVazia() {
+        return filaPratos.isEmpty();
+    }
+
+    public boolean filaCheia() {
+        return filaPratos.size() == tamanhoMaximo;
+    }
+
     public synchronized void adicionarPrato(Prato prato) {
 
         while (this.filaCheia()) {
@@ -53,18 +66,6 @@ public class Escorredor {
 
         notify();
         return prato;
-    }
-
-    public int tamanhoFila() {
-        return filaPratos.size();
-    }
-
-    public boolean filaVazia() {
-        return filaPratos.isEmpty();
-    }
-
-    public boolean filaCheia() {
-        return filaPratos.size() == tamanhoMaximo;
     }
 
     public Escorredor () {
